@@ -5,10 +5,12 @@ import page from './views/page';
 import { css } from './assets/css/Css';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home,Login,Rastreio} from './views'
+import {Home,Login,Rastreio} from './views';
+import AreaRestrita from './views/arearestrita/AreaRestrita';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+
 
   return (
     <NavigationContainer>
@@ -20,9 +22,9 @@ export default function App() {
                                   headerStyle:{backgroundColor: "#F58634"},
                                   headerTintColor: '#333', 
                                   headerTitleStyle:{fontWeight:'bold', alignSelf:'center'}}}/>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" options={{headerShown: false}} component={Login} />
         <Stack.Screen name="Rastreio" component={Rastreio} />
-        {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
+        <Stack.Screen name="AreaRestrita" component={AreaRestrita} />
       </Stack.Navigator>
     </NavigationContainer>
   );

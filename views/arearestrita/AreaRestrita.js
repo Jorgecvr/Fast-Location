@@ -1,9 +1,16 @@
 import React , {useEffect, useState} from 'react';
 import { Text, View, Button } from 'react-native';
+import { css } from '../../assets/css/Css';
 import AsyncStorage from '@react-native-community/async-storage';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {Profile,Cadastro,Edicao} from '../index';
+// Tirei o icon pq tava dando erro, no lugar use Font Awesome abaixo import { Icon } from 'react-native-vector-icons/dist/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 export default function AreaRestrita()
 {
+    const Tab = createMaterialBottomTabNavigator();
     const [user, setUser]=useState(null);
 
     useEffect(()=>{
@@ -16,9 +23,39 @@ export default function AreaRestrita()
     }, []);
 
     return(
-        <View>
-            <Text>Essa é a Área Restrita</Text>
-            <Text>Seja bem vindo {user}</Text>
-        </View>
-    )
+        <Tab.Navigator
+            activeColor='#999'
+            inactiveColor= '#fff'
+            barStyle={css.area__tab}
+        >
+            <Tab.Screen 
+                name="Profile" 
+                component={Profile} 
+                options={{
+                    tabBarIcon:()=>(
+                        <FontAwesome name="users" size={20} color="#999" />
+                    )
+                }}
+                
+            />
+            <Tab.Screen 
+                name="Cadastro" 
+                component={Cadastro}
+                options={{
+                    tabBarIcon:()=>(
+                        <FontAwesome name="archive" size={20} color="#999" />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="Edicao" 
+                component={Edicao}
+                options={{
+                    tabBarIcon:()=>(
+                        <FontAwesome name="edit" size={20} color="#999" />
+                    )
+                }}
+            />
+        </Tab.Navigator>
+    );
 }
